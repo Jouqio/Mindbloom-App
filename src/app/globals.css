@@ -1,0 +1,146 @@
+/* ============================================================
+   MindBloom — Global Styles
+   File: src/app/globals.css
+   ============================================================ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background:         0 0% 100%;
+    --foreground:         224 16% 8%;
+
+    --card:               0 0% 100%;
+    --card-foreground:    224 16% 8%;
+
+    --popover:            0 0% 100%;
+    --popover-foreground: 224 16% 8%;
+
+    --primary:            247 66% 60%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary:          40 15% 95%;
+    --secondary-foreground: 224 16% 8%;
+
+    --muted:              40 15% 95%;
+    --muted-foreground:   224 9% 48%;
+
+    --accent:             40 15% 95%;
+    --accent-foreground:  224 16% 8%;
+
+    --destructive:        0 72% 53%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border:             224 10% 88%;
+    --input:              224 10% 88%;
+    --ring:               247 66% 60%;
+
+    --radius: 0.75rem;
+
+    /* MindBloom brand tokens */
+    --color-brand-purple: #7F77DD;
+    --color-brand-teal:   #1D9E75;
+    --color-brand-coral:  #D85A30;
+    --color-brand-pink:   #D4537E;
+  }
+
+  .dark {
+    --background:         240 10% 7%;
+    --foreground:         40 10% 94%;
+
+    --card:               240 10% 9%;
+    --card-foreground:    40 10% 94%;
+
+    --popover:            240 10% 9%;
+    --popover-foreground: 40 10% 94%;
+
+    --primary:            247 66% 63%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary:          240 6% 13%;
+    --secondary-foreground: 40 10% 94%;
+
+    --muted:              240 6% 13%;
+    --muted-foreground:   240 6% 58%;
+
+    --accent:             240 6% 13%;
+    --accent-foreground:  40 10% 94%;
+
+    --destructive:        0 62% 54%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border:             240 6% 18%;
+    --input:              240 6% 18%;
+    --ring:               247 66% 63%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    @apply scroll-smooth;
+    font-feature-settings: 'rlig' 1, 'calt' 1;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Focus visible ring */
+  :focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+  }
+
+  /* Remove focus ring for mouse users */
+  :focus:not(:focus-visible) {
+    @apply outline-none;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply rounded-full bg-border;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-muted-foreground/30;
+  }
+
+  /* Text selection */
+  ::selection {
+    background-color: hsl(var(--primary) / 0.2);
+    color: hsl(var(--foreground));
+  }
+
+  /* Reduce motion */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
