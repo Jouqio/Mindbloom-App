@@ -90,4 +90,12 @@ Detail perbaikan integrasi tersedia di [`docs/MERGE_REPORT.md`](docs/MERGE_REPOR
 
 ## Lisensi
 
-Belum ditentukan.
+MindBloom menggunakan **PolyForm Noncommercial License 1.0.0**.
+
+Penggunaan, modifikasi, dan distribusi diperbolehkan untuk tujuan
+nonkomersial sesuai dengan ketentuan lisensi. Penggunaan komersial
+memerlukan izin atau lisensi komersial terpisah.
+
+SPDX-License-Identifier: `PolyForm-Noncommercial-1.0.0`
+
+Lihat [LICENSE](LICENSE) untuk ketentuan lengkap.
