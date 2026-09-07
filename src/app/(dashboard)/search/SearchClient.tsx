@@ -149,7 +149,7 @@ export function SearchClient({ totalEntries, embeddedEntries }: Props) {
                 Indeks jurnal dulu untuk mulai mencari
               </p>
               <p className="mt-1 text-xs text-amber-600 dark:text-amber-400">
-                Klik tombol "Indeks sekarang" di atas untuk mengaktifkan pencarian semantik
+                Klik tombol &ldquo;Indeks sekarang&rdquo; di atas untuk mengaktifkan pencarian semantik
               </p>
             </div>
           ) : (

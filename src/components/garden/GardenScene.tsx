@@ -8,6 +8,16 @@
 import { useState, useEffect, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { PlantSVG } from './PlantSVGs'
+import {
+  BotanicalLeaf,
+  BotanicalBlossom,
+  MindfulSpark,
+  SunOrb,
+  MoonCrescent,
+  DriftingCloud,
+  LevelSproutIcon,
+  GardenLevelIcon,
+} from '@/components/ui/BotanicalIcons'
 import { GROUND_LAYERS, GARDEN_LEVELS, type GardenPlant, type GardenLevel, type SeasonTheme } from '@/types/garden'
 import { cn } from '@/lib/utils'
 
@@ -22,12 +32,13 @@ interface GardenSceneProps {
 // ── Floating particle (firefly/leaf depending on season) ──────
 function FloatingParticle({ season, index }: { season: SeasonTheme; index: number }) {
   const isLeaf = season === 'autumn'
+  const isSummer = season === 'summer'
   const startX = 10 + (index * 17) % 80
   const duration = 8 + (index % 4) * 2
 
   return (
     <motion.div
-      className="absolute text-xs pointer-events-none"
+      className="absolute pointer-events-none"
       style={{ left: `${startX}%`, top: '10%' }}
       animate={{
         y: [0, 200, 0],
@@ -38,7 +49,13 @@ function FloatingParticle({ season, index }: { season: SeasonTheme; index: numbe
       transition={{ duration, repeat: Infinity, ease: 'easeInOut', delay: index * 1.5 }}
       aria-hidden="true"
     >
-      {isLeaf ? '🍃' : season === 'summer' ? '✨' : '🌸'}
+      {isLeaf ? (
+        <BotanicalLeaf size={16} className="text-amber-700/60 dark:text-amber-400/60" />
+      ) : isSummer ? (
+        <MindfulSpark size={14} className="text-amber-300/80 dark:text-amber-200/80" />
+      ) : (
+        <BotanicalBlossom size={16} className="text-rose-400/70 dark:text-rose-300/70" />
+      )}
     </motion.div>
   )
 }
@@ -53,10 +70,14 @@ function SkyOrnament({ level }: { level: GardenLevel }) {
       initial={{ opacity: 0, scale: 0.8 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.8 }}
-      className="absolute right-6 top-4 text-2xl"
+      className="absolute right-6 top-4"
       aria-hidden="true"
     >
-      {isNight ? '🌙' : '☀️'}
+      {isNight ? (
+        <MoonCrescent size={22} className="text-amber-100/90 dark:text-amber-200/90 drop-shadow-sm" />
+      ) : (
+        <SunOrb size={24} className="text-amber-400 dark:text-amber-300 drop-shadow-sm" />
+      )}
     </motion.div>
   )
 }
@@ -137,19 +158,23 @@ export function GardenScene({
         <FloatingParticle key={i} season={season} index={i} />
       ))}
 
-      {/* Clouds (decorative) */}
+      {/* Clouds (decorative hand-drawn SVG vector marks) */}
       <motion.div
         animate={{ x: [0, 30, 0] }}
         transition={{ duration: 30, repeat: Infinity, ease: 'easeInOut' }}
-        className="absolute left-8 top-6 text-xl opacity-60"
+        className="absolute left-8 top-6 opacity-60 text-white drop-shadow-sm pointer-events-none"
         aria-hidden="true"
-      >☁️</motion.div>
+      >
+        <DriftingCloud size={40} />
+      </motion.div>
       <motion.div
         animate={{ x: [0, -20, 0] }}
         transition={{ duration: 24, repeat: Infinity, ease: 'easeInOut', delay: 3 }}
-        className="absolute left-1/2 top-3 text-base opacity-40"
+        className="absolute left-1/2 top-3 opacity-40 text-white drop-shadow-sm pointer-events-none"
         aria-hidden="true"
-      >☁️</motion.div>
+      >
+        <DriftingCloud size={30} />
+      </motion.div>
 
       {/* Ground */}
       <div
@@ -192,22 +217,25 @@ export function GardenScene({
 
       {/* Empty state overlay */}
       {plants.length === 0 && (
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="rounded-xl bg-white/70 dark:bg-black/40 backdrop-blur-sm px-4 py-3 text-center">
+        <div className="absolute inset-0 flex items-center justify-center p-4">
+          <div className="rounded-2xl border border-border/60 bg-background/80 dark:bg-card/80 backdrop-blur-md px-5 py-4 text-center shadow-sm">
+            <div className="mx-auto mb-2 flex h-9 w-9 items-center justify-center rounded-full bg-primary/10 text-primary">
+              <LevelSproutIcon size={18} />
+            </div>
             <p className="text-sm font-medium text-foreground">
-              Taman masih kosong 🌱
+              Taman masih menanti benih
             </p>
             <p className="mt-0.5 text-xs text-muted-foreground">
-              Tulis jurnal pertamamu untuk menanam benih
+              Tulis jurnal pertamamu untuk menumbuhkan tunas pertama
             </p>
           </div>
         </div>
       )}
 
       {/* Level badge — bottom right */}
-      <div className="absolute bottom-2 right-2 flex items-center gap-1 rounded-full bg-white/80 dark:bg-black/50 backdrop-blur-sm px-2.5 py-1">
-        <span className="text-sm" aria-hidden="true">{levelCfg.emoji}</span>
-        <span className="text-[10px] font-medium text-foreground">{levelCfg.label}</span>
+      <div className="absolute bottom-2.5 right-2.5 flex items-center gap-1.5 rounded-full border border-border/60 bg-background/85 dark:bg-card/85 backdrop-blur-md px-2.5 py-1 text-foreground shadow-sm">
+        <GardenLevelIcon level={level} size={14} className="text-primary" />
+        <span className="text-[11px] font-medium tracking-wide">Level {levelCfg.label}</span>
       </div>
     </div>
   )

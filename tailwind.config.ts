@@ -10,6 +10,7 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
+        display: ['var(--font-display)', 'Georgia', 'serif'],
         sans: ['var(--font-sans)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
         mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
       },
@@ -90,7 +91,7 @@ const config: Config = {
           to:   { opacity: '1', transform: 'translateY(0)' },
         },
         'scale-in': {
-          from: { opacity: '0', transform: 'scale(0.95)' },
+          from: { opacity: '0', transform: 'scale(0.98)' },
           to:   { opacity: '1', transform: 'scale(1)' },
         },
       },
@@ -99,7 +100,7 @@ const config: Config = {
         'accordion-up':   'accordion-up 0.2s ease-out',
         shimmer:          'shimmer 1.4s ease-in-out infinite',
         'fade-in':        'fade-in 0.25s cubic-bezier(0, 0, 0.2, 1)',
-        'scale-in':       'scale-in 0.25s cubic-bezier(0.34, 1.56, 0.64, 1)',
+        'scale-in':       'scale-in 0.2s cubic-bezier(0.16, 1, 0.3, 1)',
       },
       boxShadow: {
         'xs':    '0 1px 2px rgba(0,0,0,0.04)',

@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 export default function DashboardPage() {
   return (
     <Suspense fallback={
-      <div className="mx-auto max-w-2xl px-4 py-6 md:px-6">
+      <div className="mx-auto max-w-5xl px-4 py-8 pb-28 md:px-8 md:pb-14">
         <DashboardSkeleton />
       </div>
     }>

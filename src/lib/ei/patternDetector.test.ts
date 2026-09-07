@@ -5,8 +5,11 @@ function buildDailyMoods(days: number, moodFn: (dayIndex: number, dayOfWeek: num
   const entries = []
   for (let i = 0; i < days; i++) {
     const date = new Date(2024, 0, 1 + i)
+    const year = date.getFullYear()
+    const month = String(date.getMonth() + 1).padStart(2, '0')
+    const day = String(date.getDate()).padStart(2, '0')
     entries.push({
-      entry_date: date.toISOString().split('T')[0],
+      entry_date: `${year}-${month}-${day}`,
       mood_score: moodFn(i, date.getDay()),
       energy_score: null, stress_intensity: null, stress_source: null,
       emotions: [] as string[],

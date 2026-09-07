@@ -1,26 +1,38 @@
 # dependencies
 /node_modules
+node_modules/
 /.pnp
 .pnp.js
 
 # testing
 /coverage
 
-# next.js
+# next.js & build artifacts
 /.next/
+.next/
 /out/
-
-# production
+out/
 /build
 
-# misc
-.DS_Store
-*.pem
+# agent tooling & internal artifacts
+.agents/
+.hallmark/
+implementation*.md
+implementation_*plan.md
 
 # environment variables — NEVER commit local secrets
 .env
 .env.*
+.env.local
+.env*.local
 !.env.example
+
+# logs
+*.log
+
+# misc
+.DS_Store
+*.pem
 
 # private certificates and key files
 *.key

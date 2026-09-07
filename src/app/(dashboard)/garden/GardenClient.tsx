@@ -1,15 +1,25 @@
 // ============================================================
-// MindBloom — Garden Client Component
+// MindBloom — Garden Client Component (Workbench Macrostructure)
 // File: src/app/(dashboard)/garden/GardenClient.tsx
+// Theme Garden · Newsreader + Inter · Tier B Hand-built SVGs
 // ============================================================
 
 'use client'
 
 import { useState } from 'react'
-import { motion } from 'framer-motion'
-import { Flower2, Info } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { Info, Sparkles } from 'lucide-react'
 import { GardenScene } from '@/components/garden/GardenScene'
-import { LevelProgress, PlantDetailModal, GardenStats, PlantLegend } from '@/components/garden/GardenInfo'
+import {
+  LevelProgress,
+  PlantDetailModal,
+  GardenStats,
+  PlantLegend,
+} from '@/components/garden/GardenInfo'
+import {
+  MindBloomEmblem,
+  LevelSproutIcon,
+} from '@/components/ui/BotanicalIcons'
 import { useGarden } from '@/lib/hooks/useGarden'
 import { getGardenLevel } from '@/types/garden'
 import type { GardenPlant, GardenState } from '@/types/garden'
@@ -20,7 +30,14 @@ interface Props {
 }
 
 export function GardenClient({ initialPlants, totalJournals }: Props) {
-  const { plants, state, selectedPlant, newPlantId, setSelectedPlant, clearNewPlant } = useGarden()
+  const {
+    plants,
+    state,
+    selectedPlant,
+    newPlantId,
+    setSelectedPlant,
+    clearNewPlant,
+  } = useGarden()
   const [showLegend, setShowLegend] = useState(false)
 
   // Use realtime data, fallback to server-fetched
@@ -37,40 +54,51 @@ export function GardenClient({ initialPlants, totalJournals }: Props) {
 
   return (
     <>
+      {/* Botanical detail modal */}
       <PlantDetailModal plant={selectedPlant} onClose={() => setSelectedPlant(null)} />
 
-      <main className="mx-auto max-w-2xl px-4 py-6 pb-24 md:px-6 md:pb-6">
-        {/* Header */}
-        <motion.div
+      <main className="mx-auto max-w-3xl px-3 sm:px-6 py-6 pb-24 md:pb-12 overflow-x-clip">
+        {/* Orientation Header (Workbench Standard) */}
+        <motion.header
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mb-5 flex items-center justify-between"
+          transition={{ duration: 0.3 }}
+          className="mb-6 flex items-start justify-between gap-4 border-b border-border/40 pb-4"
         >
           <div>
-            <h1 className="flex items-center gap-2 text-xl font-medium text-foreground">
-              <Flower2 className="h-5 w-5 text-green-500" aria-hidden="true" />
-              Taman Emosional
-            </h1>
-            <p className="mt-0.5 text-sm text-muted-foreground">
-              Tumbuh dari setiap refleksi yang kamu tulis
+            <div className="flex items-center gap-2.5">
+              <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-primary/10 text-primary border border-primary/20">
+                <MindBloomEmblem size={18} />
+              </div>
+              <h1 className="font-display text-2xl sm:text-3xl font-normal text-foreground tracking-tight">
+                Taman Emosional
+              </h1>
+            </div>
+            <p className="mt-1 text-xs sm:text-sm text-muted-foreground font-sans">
+              Setiap catatan refleksi menyuburkan ekosistem botani hatimu secara nyata.
             </p>
           </div>
+
+          {/* Flora catalog toggle button (min 44x44 touch target) */}
           <button
             onClick={() => setShowLegend((v) => !v)}
-            className="flex h-9 w-9 items-center justify-center rounded-xl border border-border hover:bg-secondary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-            aria-label="Lihat keterangan tanaman"
+            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-border/80 bg-card hover:bg-secondary text-muted-foreground hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            aria-label={showLegend ? 'Tutup keterangan flora' : 'Buka katalog keterangan flora'}
             aria-expanded={showLegend}
+            title="Katalog Flora Emosional"
           >
-            <Info className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
+            <Info className="h-4 w-4" aria-hidden="true" />
           </button>
-        </motion.div>
+        </motion.header>
 
-        <div className="flex flex-col gap-4">
-          {/* Garden visual */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.98 }}
+        <div className="flex flex-col gap-5">
+          {/* Direct Manipulation Workbench Canvas Frame */}
+          <motion.section
+            aria-label="Kanvas taman interaktif"
+            initial={{ opacity: 0, scale: 0.99 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.4 }}
+            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+            className="rounded-2xl border border-border/80 bg-card/40 p-1.5 shadow-sm"
           >
             <GardenScene
               plants={displayPlants}
@@ -79,28 +107,47 @@ export function GardenClient({ initialPlants, totalJournals }: Props) {
               newPlantId={newPlantId}
               onPlantClick={setSelectedPlant}
             />
-          </motion.div>
+          </motion.section>
 
-          {/* New plant notification */}
-          {newPlantId && (
-            <motion.button
-              initial={{ opacity: 0, y: -8 }}
-              animate={{ opacity: 1, y: 0 }}
-              onClick={clearNewPlant}
-              className="flex items-center justify-center gap-2 rounded-xl bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800/40 px-4 py-2.5 text-sm font-medium text-green-700 dark:text-green-300"
-            >
-              🌱 Tanaman baru tumbuh dari jurnal terakhirmu!
-            </motion.button>
-          )}
+          {/* New plant sprout notification bar */}
+          <AnimatePresence>
+            {newPlantId && (
+              <motion.button
+                initial={{ opacity: 0, y: -6 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -6 }}
+                onClick={clearNewPlant}
+                className="flex items-center justify-between rounded-xl border border-primary/30 bg-primary/10 px-4 py-2.5 text-xs sm:text-sm font-medium text-primary hover:bg-primary/15 transition-colors text-left"
+              >
+                <div className="flex items-center gap-2">
+                  <LevelSproutIcon size={16} className="text-primary shrink-0" />
+                  <span>Tanaman baru telah bersemi dari refleksi terakhirmu!</span>
+                </div>
+                <span className="text-[11px] text-muted-foreground underline ml-2">Tutup</span>
+              </motion.button>
+            )}
+          </AnimatePresence>
 
-          {/* Level progress */}
+          {/* Curved Growth Milestone Path */}
           <LevelProgress state={displayState} totalJournals={totalJournals} />
 
-          {/* Stats */}
+          {/* Asymmetric Stat Cluster */}
           <GardenStats state={displayState} />
 
-          {/* Legend (toggle) */}
-          {showLegend && <PlantLegend />}
+          {/* Plant Species Catalog Legend */}
+          <AnimatePresence>
+            {showLegend && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.25 }}
+                className="overflow-hidden"
+              >
+                <PlantLegend />
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </main>
     </>

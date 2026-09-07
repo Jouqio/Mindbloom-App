@@ -1,5 +1,6 @@
+/* Hallmark · genre: editorial · macrostructure: Bento Grid · theme: Garden · enrichment: Tier B · nav: N9 · footer: Ft6 · pre-emit critique: P5 H5 E5 S5 R5 V5 */
 /* ============================================================
-   MindBloom — Global Styles
+   MindBloom — Global Styles (Hallmark Redesign)
    File: src/app/globals.css
    ============================================================ */
 
@@ -9,37 +10,53 @@
 
 @layer base {
   :root {
-    --background:         0 0% 100%;
-    --foreground:         224 16% 8%;
+    /* Hallmark Locked Design Tokens — Garden Theme */
+    --color-paper:        oklch(97.5% 0.009 95);
+    --color-paper-2:      oklch(99% 0.005 95);
+    --color-paper-3:      oklch(95% 0.012 95);
+    --color-ink:          oklch(22% 0.02 145);
+    --color-ink-2:        oklch(42% 0.02 145);
+    --color-muted:        oklch(52% 0.015 145);
+    --color-rule:         oklch(89% 0.01 145);
+    --color-accent:       oklch(62% 0.13 148);
+    --color-accent-ink:   oklch(98% 0.005 95);
+    --color-focus:        oklch(62% 0.13 148);
 
-    --card:               0 0% 100%;
-    --card-foreground:    224 16% 8%;
+    --font-display:       var(--font-display, var(--font-sans));
+    --font-body:          var(--font-sans);
 
-    --popover:            0 0% 100%;
-    --popover-foreground: 224 16% 8%;
+    /* HSL mapping for existing Tailwind components */
+    --background:         44 20% 97.5%;
+    --foreground:         145 20% 18%;
 
-    --primary:            247 66% 60%;
-    --primary-foreground: 0 0% 100%;
+    --card:               44 25% 99%;
+    --card-foreground:    145 20% 18%;
 
-    --secondary:          40 15% 95%;
-    --secondary-foreground: 224 16% 8%;
+    --popover:            44 25% 99%;
+    --popover-foreground: 145 20% 18%;
 
-    --muted:              40 15% 95%;
-    --muted-foreground:   224 9% 48%;
+    --primary:            148 35% 42%;
+    --primary-foreground: 44 20% 98%;
 
-    --accent:             40 15% 95%;
-    --accent-foreground:  224 16% 8%;
+    --secondary:          44 14% 93%;
+    --secondary-foreground: 145 20% 18%;
 
-    --destructive:        0 72% 53%;
+    --muted:              44 14% 93%;
+    --muted-foreground:   145 10% 45%;
+
+    --accent:             148 20% 92%;
+    --accent-foreground:  148 35% 30%;
+
+    --destructive:        12 70% 52%;
     --destructive-foreground: 0 0% 100%;
 
-    --border:             224 10% 88%;
-    --input:              224 10% 88%;
-    --ring:               247 66% 60%;
+    --border:             145 10% 86%;
+    --input:              145 10% 86%;
+    --ring:               148 35% 42%;
 
     --radius: 0.75rem;
 
-    /* MindBloom brand tokens */
+    /* MindBloom botanical tokens */
     --color-brand-purple: #7F77DD;
     --color-brand-teal:   #1D9E75;
     --color-brand-coral:  #D85A30;
@@ -47,33 +64,45 @@
   }
 
   .dark {
-    --background:         240 10% 7%;
-    --foreground:         40 10% 94%;
+    /* Hallmark Locked Design Tokens — Garden Dark */
+    --color-paper:        oklch(20% 0.015 145);
+    --color-paper-2:      oklch(24% 0.018 145);
+    --color-paper-3:      oklch(28% 0.02 145);
+    --color-ink:          oklch(94% 0.008 95);
+    --color-ink-2:        oklch(75% 0.01 95);
+    --color-muted:        oklch(62% 0.015 145);
+    --color-rule:         oklch(30% 0.015 145);
+    --color-accent:       oklch(68% 0.13 148);
+    --color-accent-ink:   oklch(18% 0.015 145);
+    --color-focus:        oklch(68% 0.13 148);
 
-    --card:               240 10% 9%;
-    --card-foreground:    40 10% 94%;
+    --background:         145 15% 12%;
+    --foreground:         44 15% 94%;
 
-    --popover:            240 10% 9%;
-    --popover-foreground: 40 10% 94%;
+    --card:               145 15% 15%;
+    --card-foreground:    44 15% 94%;
 
-    --primary:            247 66% 63%;
-    --primary-foreground: 0 0% 100%;
+    --popover:            145 15% 15%;
+    --popover-foreground: 44 15% 94%;
 
-    --secondary:          240 6% 13%;
-    --secondary-foreground: 40 10% 94%;
+    --primary:            148 35% 55%;
+    --primary-foreground: 145 20% 12%;
 
-    --muted:              240 6% 13%;
-    --muted-foreground:   240 6% 58%;
+    --secondary:          145 12% 20%;
+    --secondary-foreground: 44 15% 94%;
 
-    --accent:             240 6% 13%;
-    --accent-foreground:  40 10% 94%;
+    --muted:              145 12% 20%;
+    --muted-foreground:   145 8% 62%;
+
+    --accent:             148 25% 22%;
+    --accent-foreground:  148 35% 85%;
 
     --destructive:        0 62% 54%;
     --destructive-foreground: 0 0% 100%;
 
-    --border:             240 6% 18%;
-    --input:              240 6% 18%;
-    --ring:               247 66% 63%;
+    --border:             145 10% 22%;
+    --input:              145 10% 22%;
+    --ring:               148 35% 55%;
   }
 }
 
@@ -85,6 +114,7 @@
   html {
     @apply scroll-smooth;
     font-feature-settings: 'rlig' 1, 'calt' 1;
+    overflow-x: clip;
   }
 
   body {
@@ -93,16 +123,18 @@
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: clip;
   }
 
-  /* Focus visible ring */
+  /* Focus visible ring — Gate 39 standard */
   :focus-visible {
-    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+    outline: 2px solid var(--color-focus, hsl(var(--ring)));
+    outline-offset: 1px;
   }
 
-  /* Remove focus ring for mouse users */
+  /* Remove focus ring for pointer users */
   :focus:not(:focus-visible) {
-    @apply outline-none;
+    outline: none;
   }
 
   /* Custom scrollbar */
@@ -122,7 +154,7 @@
 
   /* Text selection */
   ::selection {
-    background-color: hsl(var(--primary) / 0.2);
+    background-color: hsl(var(--primary) / 0.18);
     color: hsl(var(--foreground));
   }
 
@@ -144,3 +176,4 @@
     text-wrap: balance;
   }
 }
+

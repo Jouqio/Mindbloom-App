@@ -4,13 +4,21 @@
 // ============================================================
 
 import type { Metadata, Viewport } from 'next'
-import { Inter } from 'next/font/google'
+import { Inter, Newsreader } from 'next/font/google'
 import { AuthProvider } from '@/components/auth/AuthProvider'
 import '@/app/globals.css'
 
 const inter = Inter({
   subsets: ['latin'],
   variable: '--font-sans',
+  display: 'swap',
+})
+
+const newsreader = Newsreader({
+  subsets: ['latin'],
+  variable: '--font-display',
+  style: ['normal'], // Headings are roman — Gate 38a
+  weight: ['400', '500', '600'],
   display: 'swap',
 })
 
@@ -33,8 +41,8 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
-    { media: '(prefers-color-scheme: dark)',  color: '#0d0d12' },
+    { media: '(prefers-color-scheme: light)', color: '#fbf9f4' },
+    { media: '(prefers-color-scheme: dark)',  color: '#1a211c' },
   ],
   width: 'device-width',
   initialScale: 1,
@@ -46,7 +54,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="id" suppressHydrationWarning className={inter.variable}>
+    <html lang="id" suppressHydrationWarning className={`${inter.variable} ${newsreader.variable}`}>
       <body className="min-h-screen bg-background font-sans antialiased">
         <AuthProvider>
           {children}
@@ -55,3 +63,4 @@ export default function RootLayout({
     </html>
   )
 }
+
