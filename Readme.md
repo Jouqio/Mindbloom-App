@@ -1,157 +1,27 @@
-<div align="center">
+<h1 align="center">MindBloom</h1>
 
-# MindBloom
+<p align="center">Aplikasi personal wellness jurnal, habit tracking, breathing exercises, dan AI Coach dalam satu platform.</p>
 
-**Personal wellness companion untuk refleksi, kebiasaan sehat, dan pertumbuhan diri.**
+<p align="center"><sub>Bukan pengganti diagnosis atau saran dari tenaga kesehatan profesional.</sub></p>
 
-[![Next.js](https://img.shields.io/badge/Next.js-15-black?logo=next.js&logoColor=white)](https://nextjs.org)
-[![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black)](https://react.dev)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind-CSS-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
-[![Supabase](https://img.shields.io/badge/Supabase-PostgreSQL-3FCF8E?logo=supabase&logoColor=white)](https://supabase.com)
-[![OpenAI](https://img.shields.io/badge/OpenAI-API-412991?logo=openai&logoColor=white)](https://openai.com)
-[![License](https://img.shields.io/badge/License-TBD-lightgrey)](./LICENSE)
-
-<br/>
-
-> ⚠️ **Disclaimer:** MindBloom bukan pengganti diagnosis, terapi, atau saran dari tenaga kesehatan profesional.
-
-</div>
-
----
-
-## Daftar Isi
-
-- [Tentang](#-tentang)
-- [Fitur](#-fitur)
-- [Teknologi](#-teknologi)
-- [Prasyarat](#-prasyarat)
-- [Instalasi](#-instalasi)
-- [Environment Variables](#-environment-variables)
-- [Perintah](#-perintah)
-- [Struktur Project](#-struktur-project)
-- [Keamanan & Deployment](#-keamanan--deployment)
-- [Status Verifikasi](#-status-verifikasi)
-- [Lisensi](#-lisensi)
-
----
-
-## Tentang
-
-MindBloom adalah aplikasi **personal wellness** yang membantu pengguna membangun kebiasaan sehat, memahami kondisi diri, dan melakukan refleksi secara konsisten.
-
-Menggabungkan **jurnal reflektif**, **habit tracking gamifikasi**, **latihan pernapasan**, **AI Coach**, dan **visualisasi perkembangan** dalam satu dashboard yang terintegrasi.
-
----
-
-## Fitur
-
-| Kategori           | Deskripsi                                            |
-| ------------------ | ---------------------------------------------------- |
-| **Akun**           | Autentikasi, onboarding, profil, dan pengaturan akun |
-| **Jurnal**         | Refleksi harian dengan pencarian dan analitik        |
-| **Habit Tracking** | Streak, XP, achievement, dan garden progression      |
-| **Life Wheel**     | Visualisasi keseimbangan area kehidupan              |
-| **Breathing**      | Latihan pernapasan dan soundscape                    |
-| **AI Coach**       | Percakapan reflektif berbasis AI                     |
-| **Insight**        | Emotional intelligence scoring dari data jurnal      |
-| **Memory Search**  | Semantic search untuk konteks personal               |
-| **Vault**          | Penyimpanan konten privat                            |
-| **Berlangganan**   | Paket premium dengan checkout Midtrans               |
-
----
-
-## Teknologi
-
-**Frontend**
-
-- [Next.js 15](https://nextjs.org) — App Router, Server Components
-- [React 19](https://react.dev) + [TypeScript](https://www.typescriptlang.org)
-- [Tailwind CSS](https://tailwindcss.com), [Radix UI](https://www.radix-ui.com), [Lucide React](https://lucide.dev), [Framer Motion](https://www.framer.com/motion/)
-
-**Backend & Database**
-
-- [Supabase](https://supabase.com) — Auth, PostgreSQL, Row Level Security, Storage
-
-**AI & Payments**
-
-- [OpenAI API](https://openai.com) — Insight, embedding, memory search, AI Coach
-- [Midtrans](https://midtrans.com) — Payment gateway
-
-**State & Testing**
-
-- [Zustand](https://zustand-demo.pmnd.rs/) — State management
-- [Vitest](https://vitest.dev) — Unit testing
-
----
-
-## Prasyarat
-
-Pastikan semua dependensi berikut sudah tersedia sebelum memulai:
-
-- **Node.js** `≥ 20`
-- **npm**
-- Project **Supabase** aktif
-- **API Key OpenAI** untuk fitur AI
-- **Akun Midtrans Sandbox** untuk fitur pembayaran
-
----
-
-## Instalasi
-
-### 1. Clone Repository
+## Memulai
 
 ```bash
 git clone https://github.com/username/mindbloom.git
 cd mindbloom
-```
-
-### 2. Install Dependencies
-
-```bash
 npm install
+cp .env.example .env.local   # Windows: Copy-Item .env.example .env.local
 ```
 
-### 3. Salin File Environment
-
-```bash
-# macOS / Linux
-cp .env.example .env.local
-
-# Windows PowerShell
-Copy-Item .env.example .env.local
-```
-
-### 4. Isi Environment Variables
-
-Buka `.env.local` dan isi semua nilai yang diperlukan. Lihat bagian [Environment Variables](#-environment-variables) di bawah.
-
-### 5. Jalankan Migrasi Database
-
-Buka **Supabase SQL Editor** dan jalankan file migrasi berikut:
-
-- **Instalasi baru** — gunakan file gabungan:
-  ```
-  supabase/00_COMBINED_ALL_MIGRATIONS.sql
-  ```
-- **Migrasi bertahap** — tersedia di:
-  ```
-  supabase/migrations/
-  ```
-
-### 6. Jalankan Development Server
+Isi `.env.local`, jalankan migrasi di Supabase SQL Editor, lalu:
 
 ```bash
 npm run dev
 ```
 
-Buka [http://localhost:3000](http://localhost:3000) di browser.
+Buka `http://localhost:3000`.
 
----
-
-## Environment Variables
-
-Salin dari `.env.example` dan isi nilai berikut pada `.env.local`:
+## Environment
 
 ```env
 # Supabase
@@ -173,77 +43,51 @@ NEXT_PUBLIC_MIDTRANS_IS_PRODUCTION=false
 NEXT_PUBLIC_APP_URL=http://localhost:3000
 ```
 
-> **Jangan pernah commit `.env.local` atau secret API ke repository.**
+## Database
 
----
+Untuk instalasi baru, jalankan `supabase/00_COMBINED_ALL_MIGRATIONS.sql` di Supabase SQL Editor. Migrasi individual tersedia di `supabase/migrations/`.
 
-## Perintah
+## Stack
+
+| | |
+|---|---|
+| **Frontend** | ![Next.js](https://img.shields.io/badge/Next.js%2015-000?logo=nextdotjs&logoColor=white) ![React](https://img.shields.io/badge/React%2019-20232A?logo=react&logoColor=61DAFB) ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white) ![Tailwind](https://img.shields.io/badge/Tailwind-06B6D4?logo=tailwindcss&logoColor=white) ![Framer](https://img.shields.io/badge/Framer-0055FF?logo=framer&logoColor=white) |
+| **Backend** | ![Next.js Server Actions](https://img.shields.io/badge/Next.js%20(Server%20Actions)-000?logo=nextdotjs&logoColor=white) |
+| **Database** | ![Supabase](https://img.shields.io/badge/Supabase-3FCF8E?logo=supabase&logoColor=white) ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?logo=postgresql&logoColor=white) |
+| **AI** | ![OpenAI](https://img.shields.io/badge/OpenAI-412991?logo=openai&logoColor=white) |
+| **Payment** | ![Midtrans](https://img.shields.io/badge/Midtrans-009FE3?logoColor=white) |
+| **State** | ![Zustand](https://img.shields.io/badge/Zustand-000?logo=zustand&logoColor=white) |
+| **Testing** | ![Vitest](https://img.shields.io/badge/Vitest-6E9F18?logo=vitest&logoColor=white) |
+
+## Scripts
 
 ```bash
-npm run dev            # Jalankan development server
-npm run build          # Buat production build
-npm run start          # Jalankan production build
-
-npm run type-check     # Periksa tipe TypeScript
-npm run test           # Jalankan test sekali
-npm run test:watch     # Jalankan test dalam watch mode
-npm run test:coverage  # Laporan coverage
-
-npm run format         # Format file dengan Prettier
+npm run dev             # development server
+npm run build           # production build
+npm run type-check      # TypeScript check
+npm run test            # run tests
+npm run test:coverage   # coverage report
+npm run format          # Prettier
 ```
 
----
-
-## Struktur Project
+## Struktur
 
 ```
-mindbloom/
-├── src/
-│   ├── app/           # Halaman, layout, route API, middleware (Next.js App Router)
-│   ├── components/    # Komponen UI berdasarkan domain fitur
-│   ├── lib/           # Integrasi Supabase, AI, memory, payment, utilitas
-│   ├── store/         # Zustand stores
-│   └── types/         # TypeScript types dan test domain
-├── supabase/
-│   ├── migrations/    # File migrasi database berurutan
-│   └── 00_COMBINED_ALL_MIGRATIONS.sql
-├── docs/              # Dokumentasi integrasi dan laporan verifikasi
-├── .env.example
-└── README.md
+src/app/          # routes, API handlers, middleware
+src/components/   # UI components per domain
+src/lib/          # Supabase, OpenAI, Midtrans, utilities
+src/store/        # Zustand stores
+src/types/        # TypeScript types
+supabase/         # migrations dan RLS policies
+docs/             # integration docs
 ```
 
----
+## Deployment
 
-## 🛡 Keamanan & Deployment
+Salin semua environment variable ke platform deployment. Ubah `MIDTRANS_IS_PRODUCTION` ke `true` hanya saat menggunakan credential production Midtrans. Pastikan `type-check`, `test`, dan `build` lolos sebelum deploy.
 
-Sebelum deploy ke production, pastikan checklist berikut terpenuhi:
-
-- [ ] Semua environment variable sudah diisi pada platform deployment (misalnya Vercel)
-- [ ] Migrasi database sudah diterapkan
-- [ ] `npm run type-check` berhasil tanpa error
-- [ ] `npm run test` berhasil tanpa kegagalan
-- [ ] `npm run build` berhasil tanpa error
-- [ ] Ubah `MIDTRANS_IS_PRODUCTION=true` **hanya** saat siap menerima pembayaran live
-- [ ] Gunakan credential production Midtrans saat go-live
-
----
-
-## Status Verifikasi
-
-Project ini merupakan hasil integrasi beberapa sprint fitur MindBloom. Detail lengkap mengenai perbaikan integrasi, kompatibilitas Next.js, database typing, dan rate limiting tersedia di:
-
-[`docs/MERGE_REPORT.md`](docs/MERGE_REPORT.md)
-
----
+Detail perbaikan integrasi tersedia di [`docs/MERGE_REPORT.md`](docs/MERGE_REPORT.md).
 
 ## Lisensi
 
-Lisensi belum ditentukan. Tambahkan file `LICENSE` dan perbarui bagian ini ketika lisensi project sudah diputuskan.
-
----
-
-<div align="center">
-
-Dibuat dengan ❤️ untuk kesehatan mental yang lebih baik.
-
-</div>
+Belum ditentukan.
