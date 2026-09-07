@@ -170,7 +170,7 @@ export function SemanticSearch() {
             ) : (
               <>
                 <p className="text-xs text-muted-foreground">
-                  {results.length} jurnal ditemukan untuk "{query}"
+                  {results.length} jurnal ditemukan untuk &ldquo;{query}&rdquo;
                 </p>
                 {results.map((r, i) => {
                   const mood    = r.mood_category as MoodCategory | null

@@ -5,6 +5,7 @@
 
 import { createClient } from "@/lib/supabase/server";
 import { Navbar } from "@/components/layout/Navbar";
+import { Footer } from "@/components/layout/Footer";
 
 export default async function DashboardLayout({
   children,
@@ -33,6 +34,8 @@ export default async function DashboardLayout({
     <div className="flex min-h-screen flex-col bg-background">
       <Navbar />
       <div className="flex-1">{children}</div>
+      <Footer />
     </div>
   );
 }
+
